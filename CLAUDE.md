@@ -68,11 +68,14 @@ Do not trade polymarket.com Global from the US. Legal paper/live: Kalshi demo th
 
 ## What to build next (in order)
 
-1. Keep tests green.
-2. Free Polymarket historical puller (public API only) into `data/` (gitignored raw files).
-3. Walk-forward ≥ 180 days with fees + spread on that data.
-4. Wire a paper adapter (no live orders).
-5. Only if the user asks **and** walk-forward passed: live, still 1% of the same $50.
+Match docs/BUILD.md. Locked: Kalshi maker A at 1%.
+
+1. Keep tests green. Do not replace the ensemble.
+2. Kalshi paper adapter (demo RSA-PSS, fractional size, maker bids p>=0.50, never take p<0.20).
+3. Paper loop: post/cancel, journal, HALT file.
+4. Record live books to data/kalshi/book/ (gitignored). Maker walk-forward is FAIL until 180 days of those files exist. No candle-as-maker. No Polymarket Global puller.
+5. Live only if the user asks and the paper path is stable. Maker WF is still FAIL so do not claim edge.
+
 
 ## Tests to keep green
 
