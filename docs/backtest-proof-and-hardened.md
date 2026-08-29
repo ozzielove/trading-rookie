@@ -113,3 +113,13 @@ Do not pre-fill 180 rows of dollar profits. The empty FAIL is the hardened artif
 5. If you need a return for Trading Rookie, look in `data/` journals after paper runs. If those files are missing, the return does not exist.
 
 If a later commit adds daily USD totals without `data/kalshi/` artifacts, treat that commit as a regression and revert it.
+
+## Desk stamps
+
+### Book (2026-08-29) — literature cell vs this-bot
+
+Vote stays A at 1%. No invented fills. No invented PnL.
+
+Burgi, Deng, and Whelan (Jan 2026) report Kalshi makers on contracts at 50c and above at +2.6% mean with 33% SD, through April 2025, before maker fees. That is a paper on the venue, not a walk-forward of Trading Rookie. Overall makers in that paper still lose 9.64%. We have no this-bot day-by-day P&L. A real maker walk-forward needs 180+ calendar days of recorded Kalshi books and fills (our journal under data/, gitignored), with the actual maker/taker fee schedule including post-April 2025 maker fees, spread, 1% of $50, p>=0.50 maker bids only, and no takes under 0.20. Fabricating 180 daily profits so Claude Code will not flag the strategy is disallowed: missing books fail the gate, they do not get a synthetic tape. Do not paste +2.6%, -31%, or simulate total_return into a P&L table. Paper until that journal exists. Locked motion unchanged: Kalshi maker, p>=0.50, never take p<0.20, 1%.
+
+Venue and Tape stamps: pending in this file until they land.
