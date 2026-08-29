@@ -1,5 +1,14 @@
 # Trading Rookie
 
+## Read first (clone)
+
+Before CLAUDE.md, BUILD.md, or any Python: read the backtest notes and proof.
+
+1. [`docs/backtest-proof-and-hardened.md`](docs/backtest-proof-and-hardened.md) — PAPER vs this-bot FAIL, Book/Venue/Tape stamps. Not hearsay.
+2. [`docs/prd/03-backtest-gate.md`](docs/prd/03-backtest-gate.md) — Tape gate. Maker walk-forward is FAIL until recorded books exist.
+
+Do not invent daily P&L. `simulate` is wiring, not an edge.
+
 Paper-first, fully adaptive trading system. Starting bankroll **$50**. Risk per trade is **1%** of equity. Built to be driven 100% from **Claude Code CLI**.
 
 This is not a frozen strategy. It is an ensemble of sleeves that keep living. They reweight, retune, and change shape as evidence comes in. Losers are not deleted. They shrink and keep learning.
@@ -16,7 +25,7 @@ cd trading-rookie
 claude
 ```
 
-Claude Code reads CLAUDE.md then docs/PRD.md and executes docs/BUILD.md step by step. You should not need to type the Python yourself.
+Claude Code reads the two files above first, then CLAUDE.md, then docs/PRD.md, then executes docs/BUILD.md. You should not need to type the Python yourself.
 
 ## $50 is the only money
 
