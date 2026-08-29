@@ -16,7 +16,7 @@ cd trading-rookie
 claude
 ```
 
-Claude Code reads `CLAUDE.md` and runs setup, tests, and paper simulation locally. You should not need to type the Python yourself.
+Claude Code reads CLAUDE.md then docs/PRD.md and executes docs/BUILD.md step by step. You should not need to type the Python yourself.
 
 ## $50 is the only money
 

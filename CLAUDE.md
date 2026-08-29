@@ -12,7 +12,7 @@ claude
 
 Once you start:
 
-1. Read this file and `README.md`.
+1. Read this file, README.md, docs/PRD.md, then execute docs/BUILD.md in order.
 2. `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && cp -n .env.example .env`
 3. `PYTHONPATH=src pytest -q` and `PYTHONPATH=src python -m trading_rookie simulate`
 4. Stay in `TRADING_ROOKIE_MODE=paper`. Do not ask for API spend, GPU cloud, Vercel, or a second bankroll.
@@ -27,7 +27,7 @@ Allowed (free):
 
 - This GitHub repo
 - Local Python 3.11+
-- Public Polymarket / CLOB HTTP APIs, Gamma API, public subgraphs
+- Public Kalshi market data and demo API
 - Claude Code CLI (already paid for by the user)
 
 Forbidden unless the user explicitly overrides in chat:
@@ -85,3 +85,8 @@ Do not trade polymarket.com Global from the US. Legal paper/live: Kalshi demo th
 ## Runtime split
 
 You (Claude Code CLI) build and test locally. Hostinger VPS runs the Python loop 24/7. OpenClaw supervises (status, halt). Do not call a chat model on every tick.
+
+
+## Build order
+
+Execute docs/BUILD.md top to bottom. PRD lives in docs/PRD.md and docs/prd/.
