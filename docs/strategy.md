@@ -1,12 +1,9 @@
-# Strategy
+# Strategy (2026-08-29)
 
-Not sandstone. The strategy *is* the adaptive loop:
+Venue: Kalshi first (US legal, demo API, fractional size). Polymarket US sports is plan B after iOS KYC. Do not trade polymarket.com from the US.
 
-1. Multiple sleeves always alive (value, momentum, liquidity, event drift, plus spawns).
-2. Posterior weights update every outcome. Floor weight so nothing dies.
-3. Each sleeve morphs parameters online (polymorphic form).
-4. Structured residual error spawns a new sleeve. Old ones remain.
-5. Regime state (quiet / thin / stress / event) is a feature, not a hard switch that zeros anyone.
-6. Size is always `0.01 * equity`, then split by weights.
+Edge: maker-side fade-longshot. Post bids on compressed favorites. Never take p under 0.20. LLM is a risk filter at most, not a pricer.
 
-Venue-specific edges (Polymarket mispricing, copy-trading, maker rebates, etc.) get attached as new sleeves once research lands and a walk-forward with real data passes. Until then, `python -m trading_rookie simulate` is a synthetic wiring test, not an edge claim.
+The adaptive ensemble stays on: sleeves reweight and morph. This edge is sleeve DNA, not a frozen rule.
+
+Backtest gate: walk-forward on free Kalshi history, fees plus spread, 180+ days, 1 percent of 50 dollars. Synthetic simulate is wiring only.

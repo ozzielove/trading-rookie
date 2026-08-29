@@ -40,6 +40,11 @@ Forbidden unless the user explicitly overrides in chat:
 
 If a library or venue requires a credit card to even paper-trade, do not add it. Prefer a free venue adapter.
 
+## Venue (US)
+
+Do not trade polymarket.com Global from the US. Legal paper/live: Kalshi demo then prod, or Polymarket US after iOS KYC. Default next adapter is Kalshi (fractional size fits 0.50 dollar tickets). Sports-only on Polymarket US today.
+
+
 ## Non-negotiables
 
 - `Config.mode` stays `paper` unless the user says otherwise in this session.
