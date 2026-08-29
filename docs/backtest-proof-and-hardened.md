@@ -87,10 +87,12 @@ So a 120-day or 365-day table of this-bot profit per day **cannot be filled hone
 
 | Horizon | This-bot maker PnL | Status |
 | --- | --- | --- |
-| 30 days | not computed | FAIL, no L2 |
-| 90-120 days | not computed | FAIL, no L2 |
-| 1 year | not computed | FAIL, no L2 |
+| 120 days (from 2026-05-01) | none | FAIL every day, 0 PASS, no book |
+| 180 days (from 2026-03-02) | none | FAIL every day, 0 PASS, no book |
+| 365 days (from 2025-08-29) | none | FAIL every day, 0 PASS, no book |
 | Burgi maker>=50c cell | +2.6% mean, 33% SD | PAPER, pre-maker-fee, not this bot |
+
+Do not emit a CSV of `net_pnl=0.00` for those dates. That would be a fabricated flat equity curve.
 
 ## Daily log (how proof will look when it exists)
 
@@ -172,4 +174,50 @@ Sources: docs.kalshi.com historical data + fee rounding, kalshi.com/docs/kalshi-
 
 Desk note on size: locked motion in `docs/prd/01-strategy.md` is maker bids **p>=0.50**, never take p<0.20. Venue's p>=0.55 is a stricter operating subset, not a reopen. Whole 50c and 55c lots still break the $0.50 1% cap. Fractional only.
 
-Tape stamp: pending in this file until it lands.
+### Tape (2026-08-29) — day-by-day maker profit FAIL
+
+No fake equity. No `$0.00` CSV. Candle-as-maker still forbidden.
+
+```
+date: 2026-08-29
+maker_walk_forward: FAIL
+daily_pnl_120d: FAIL
+daily_pnl_180d: FAIL
+daily_pnl_365d: FAIL
+reason: no historical L2/BBO; no files in data/kalshi/book/
+candle_as_maker: forbidden
+invented_fills: forbidden
+invented_daily_pnl: forbidden
+equity_curve: none
+PASS_days: 0
+```
+
+Public counts actually retrieved 2026-08-29 (unauth), `https://external-api.kalshi.com/trade-api/v2`:
+
+| Fact | Value |
+| --- | --- |
+| `GET /historical/cutoff` | `2026-06-30T00:00:00Z` (HTTP 200) |
+| Oldest hist print | `2021-06-30T20:09:14Z` `HOME-21JUN-T750` |
+| Print at cutoff | `2026-06-29T23:59:59Z` |
+| Print at 180d boundary | `2026-03-01T23:59:59Z` |
+| Newest live print | `2026-08-29T09:48:32Z` |
+| 1-min candles | `KXHIGHNY-26JUN28-B81.5` n=421 (bid/ask OHLC, not BBO) |
+| Hist orderbook | HTTP 404 |
+
+A 365-day **trade** calendar exists. A 365-day **maker fill** calendar does not. Tape `taker_book_side` is someone else.
+
+Journal template (`data/kalshi/journal/daily.csv`, gitignored) fails closed:
+
+```
+date,status,n_snapshots,n_resting_quotes,n_maker_fills,n_taker_fills_violation,notional,gross_pnl,fees,spread_at_send_sum,net_pnl,equity_eod,fail_reason
+```
+
+If `n_snapshots=0` → `status=FAIL`, empty PnL columns, `fail_reason=no_book`. Example (illustrative, not results):
+
+```
+2026-03-02,FAIL,0,,,,,,,,,,no_book
+2026-08-29,FAIL,0,,,,,,,,,,no_book
+```
+
+Canonical gate: `docs/prd/03-backtest-gate.md`. PR 2 was a whole-file add of Tape's draft; it was folded here so Book and Venue stamps stay.
+
