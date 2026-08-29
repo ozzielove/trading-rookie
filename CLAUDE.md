@@ -12,7 +12,7 @@ claude
 
 Once you start:
 
-1. Read this file, README.md, docs/PRD.md, then execute docs/BUILD.md in order.
+1. Read this file, README.md, docs/PRD.md, docs/prd/, then docs/thinking/. Then execute docs/BUILD.md in order. If docs collide: 00-constraints.md, then thinking/logic.md, then BUILD.md, then this file. Fail closed.
 2. `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && cp -n .env.example .env`
 3. `PYTHONPATH=src pytest -q` and `PYTHONPATH=src python -m trading_rookie simulate`
 4. Stay in `TRADING_ROOKIE_MODE=paper`. Do not ask for API spend, GPU cloud, Vercel, or a second bankroll.

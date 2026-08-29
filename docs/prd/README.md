@@ -10,3 +10,4 @@ Read in order. Claude Code CLI executes docs/BUILD.md after this folder.
 6. 04-runtime-24-7.md — Hostinger Python loop, OpenClaw supervisor
 7. ../BUILD.md — numbered implementation steps
 8. ../CLAUDE.md — operator rules
+8. ../thinking/ — reasoning trail (notes, logic, thought). Not a PRD.
