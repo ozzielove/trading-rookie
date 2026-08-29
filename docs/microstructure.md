@@ -7,3 +7,5 @@ Taker fee rounds up M times 0.07 times C times P times (1-P). One lot: 10c=0.01,
 No historical order book. Tape walk-forward is a hard fail without live recording or paid books.
 
 Do not use polymarket.com from the US.
+
+Fees (Feb 2026 PDF via Wayback; live PDF 429 on 2026-08-29): taker round up 0.07*C*P*(1-P). Maker 0.0175 only if the series is on the maker-fee list.
