@@ -1,16 +1,39 @@
 # Trading Rookie
 
-Paper-first, fully adaptive trading system. Starting bankroll $50. Risk per trade is 1% of equity.
+Paper-first, fully adaptive trading system. Starting bankroll **$50**. Risk per trade is **1%** of equity. Built to be driven 100% from **Claude Code CLI**.
 
-This is not a frozen strategy. It is an ensemble of sleeves that keep living. They reweight, retune, and change shape as evidence comes in. Losers do not get deleted. They shrink and keep learning.
+This is not a frozen strategy. It is an ensemble of sleeves that keep living. They reweight, retune, and change shape as evidence comes in. Losers are not deleted. They shrink and keep learning.
 
 Live trading is off by default. Do not turn it on until a walk-forward backtest of at least 6 months (12 preferred) survives fees, spread, and the 1% cap.
+
+## Claude Code CLI (this is the product)
+
+No other IDE, cloud agent, or paid platform is required.
+
+```bash
+git clone https://github.com/ozzielove/trading-rookie.git
+cd trading-rookie
+claude
+```
+
+Claude Code reads `CLAUDE.md` and runs setup, tests, and paper simulation locally. You should not need to type the Python yourself.
+
+## $50 is the only money
+
+| Spend | Allowed |
+| --- | --- |
+| $50 trading bankroll | Yes (1% tickets) |
+| Paid data / signals / SaaS / extra cloud | No |
+| Second deposit "for gas" or "for Vercel" | No — gas, if any, comes out of the $50 |
+
+Paper mode costs $0. Live mode, when you later opt in, is that same $50.
 
 ## What it is not
 
 - A "$6k/day AI bot" clone
 - A genetic kill-or-clone farm (winners copy, losers die)
 - A sandstone backtest you deploy once and pray
+- A project that needs more cash to "just start"
 
 ## Adaptive loop
 
@@ -23,24 +46,22 @@ Every resolved market / bar:
 5. **Size** — 1% of current equity, split by posterior weights
 6. **Record** — everything needed to audit why it changed
 
-Walk-forward is the test: train on expanding history, trade the next window, repeat. A sleeve that worked in 2024 and failed in 2025 should lose weight, not vanish, and should be allowed to recover.
-
-## Status
-
-Research is in progress (literature, GitHub landscape, Polymarket microstructure, claim-checking). Strategy notes get filled as that lands. The learner itself is in `src/trading_rookie/` and is designed to run before we pick a venue-specific edge.
-
-## Setup
+## Manual setup (only if you are not using Claude Code)
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-pytest
-python -m trading_rookie simulate
+PYTHONPATH=src pytest -q
+PYTHONPATH=src python -m trading_rookie simulate
 ```
 
-Claude Code: read `CLAUDE.md` before editing.
+Or: `make setup test simulate`
+
+## Status
+
+Research is in progress. The learner in `src/trading_rookie/` already adapts. Venue edges get attached as sleeves once a real-data walk-forward passes. `simulate` on synthetic history is a wiring test, not an edge claim.
 
 ## Risk
 
