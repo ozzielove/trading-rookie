@@ -122,4 +122,54 @@ Vote stays A at 1%. No invented fills. No invented PnL.
 
 Burgi, Deng, and Whelan (Jan 2026) report Kalshi makers on contracts at 50c and above at +2.6% mean with 33% SD, through April 2025, before maker fees. That is a paper on the venue, not a walk-forward of Trading Rookie. Overall makers in that paper still lose 9.64%. We have no this-bot day-by-day P&L. A real maker walk-forward needs 180+ calendar days of recorded Kalshi books and fills (our journal under data/, gitignored), with the actual maker/taker fee schedule including post-April 2025 maker fees, spread, 1% of $50, p>=0.50 maker bids only, and no takes under 0.20. Fabricating 180 daily profits so Claude Code will not flag the strategy is disallowed: missing books fail the gate, they do not get a synthetic tape. Do not paste +2.6%, -31%, or simulate total_return into a P&L table. Paper until that journal exists. Locked motion unchanged: Kalshi maker, p>=0.50, never take p<0.20, 1%.
 
-Venue and Tape stamps: pending in this file until they land.
+### Venue (2026-08-29) — Kalshi API, size, fees, no historical book
+
+## Venue stamp (Kalshi, A/1% locked)
+
+Do not reopen unless Ozirus changes the motion. No invented PnL. No VPN. No polymarket.com Global.
+
+### Demo vs live
+
+| | Demo (paper) | Live |
+| --- | --- | --- |
+| UI | https://demo.kalshi.co/ (`.co`) | https://kalshi.com |
+| REST | `https://external-api.demo.kalshi.co/trade-api/v2` | `https://external-api.kalshi.com/trade-api/v2` |
+| Keys | RSA-PSS, mock PII | RSA-PSS, real KYC |
+| Funds | Not preloaded. Test Visa. Treat as $50. | Real cash after KYC |
+| Cross | Keys and balances do not mix | |
+
+Paper on demo until Tape’s walk-forward (fees plus spread, 180+ days, 1% of $50) passes **and** production KYC is done. A chat model is not the trader. Python posts and cancels.
+
+### Fractional 1% size
+
+Min size **0.01** contracts. $1 payout. 1% of $50 = **$0.50**. Official 1-lot taker table: 50c costs **$0.52**. That 1-lot **breaks the cap**. Locked sleeve is maker fade p>=0.55; one whole contract at 55c is $0.55 before fees, also over. Size `count` `"0.01"`–`"0.90"` or skip.
+
+### Fee formulas (PDF 2026-07-07)
+
+- Taker: `round up(M × 0.07 × C × P × (1 − P))`. 1-lot table: 10c $0.01, 50c $0.02, 90c $0.01.
+- Maker: `round up(M × 0.0175 × C × P × (1 − P))` with **M default 0** unless the series is in Maker Fees. Read `fee_type` / `fee_multiplier` on `GET /series/{ticker}`. `KXNFLGAME` was `quadratic_with_maker_fees` on 2026-08-29.
+- Binary settlement fee: none.
+
+### No historical orderbook (404)
+
+Live `GET /markets/{ticker}/orderbook` is public (200 on 2026-08-29). Guessed archive paths `GET /historical/markets/{ticker}/orderbook` and `GET /historical/orderbook` return **404 page not found**. Docs list no snapshot endpoint. Depth history does not exist on free REST. Reconstruct going forward from signed WS `orderbook_delta` only.
+
+### Why a day PnL table cannot be filled from public REST
+
+Public REST gives: cutoff, market metadata, candlesticks (yes bid/ask/trade OHLC, 1/60/1440 min), public tape (`/markets/trades` and `/historical/trades`). That is **not** this bot’s P&L.
+
+A day PnL row for A/1% needs, per idea: whether a **post_only** bid would have been queued, at what size, whether it was hit, maker vs taker, fee actually charged, and cash change. None of that is in the public endpoints.
+
+- No historical book (404) means no queue, no fill probability, no maker-fill reconstruction.
+- Public tape is **someone else’s** prints, not our `count` at our limit.
+- User fills (`GET /historical/fills`) need RSA keys and are empty until demo paper trades exist.
+- Candles are OHLC, not fills. Mark-to-mid from candles is not realized PnL.
+- Demo and live books are different; demo prints are not a live day table.
+
+Therefore any $/day or day-PnL table built only from public REST is **invented**. Leave those cells empty until Tape has fills (paper first) and a walk-forward that includes fees plus spread. Venue desk will not supply placeholder numbers.
+
+Sources: docs.kalshi.com historical data + fee rounding, kalshi.com/docs/kalshi-fee-schedule.pdf, live GETs 2026-08-29 (book 200, historical book 404). `docs/prd/02-kalshi.md`.
+
+Desk note on size: locked motion in `docs/prd/01-strategy.md` is maker bids **p>=0.50**, never take p<0.20. Venue's p>=0.55 is a stricter operating subset, not a reopen. Whole 50c and 55c lots still break the $0.50 1% cap. Fractional only.
+
+Tape stamp: pending in this file until it lands.
