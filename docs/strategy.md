@@ -1,9 +1,9 @@
-# Strategy (2026-08-29)
+# Strategy (unanimous 2026-08-29)
 
-Venue: Kalshi first (US legal, demo API, fractional size). Polymarket US sports is plan B after iOS KYC. Do not trade polymarket.com from the US.
+Desk vote: Professor, Book, Venue, Tape. All A at 1 percent.
 
-Edge: maker-side fade-longshot. Post bids on compressed favorites. Never take p under 0.20. LLM is a risk filter at most, not a pricer.
+Kalshi maker fade-longshot. Bid p at 50c and up. Never take p under 0.20. Fractional size so 1 percent of 50 dollars fits. Paper on Kalshi demo first.
 
-The adaptive ensemble stays on: sleeves reweight and morph. This edge is sleeve DNA, not a frozen rule.
+Not a live backtest. No historical order book. Plus 2.6 percent is Burgi makers on 50c+ before maker fees, SD 33 percent. Overall makers lost 9.64 percent.
 
-Backtest gate: walk-forward on free Kalshi history, fees plus spread, 180+ days, 1 percent of 50 dollars. Synthetic simulate is wiring only.
+Rejected: size-up, Polymarket US as primary, taker longshots, LLM as pricer, polymarket.com Global.
