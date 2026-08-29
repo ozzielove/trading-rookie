@@ -80,3 +80,8 @@ Do not trade polymarket.com Global from the US. Legal paper/live: Kalshi demo th
 - Weights sum to 1 and every sleeve stays strictly positive
 - `morph()` changes parameters without removing the sleeve
 - Backtest raises if fee/spread omitted or history < 180 days
+
+
+## Runtime split
+
+You (Claude Code CLI) build and test locally. Hostinger VPS runs the Python loop 24/7. OpenClaw supervises (status, halt). Do not call a chat model on every tick.
