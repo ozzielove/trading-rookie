@@ -61,7 +61,7 @@ Or: `make setup test simulate`
 
 ## Status
 
-Research is in progress. The learner in `src/trading_rookie/` already adapts. Venue edges get attached as sleeves once a real-data walk-forward passes. `simulate` on synthetic history is a wiring test, not an edge claim.
+Locked spec: Kalshi maker, p≥0.50, 1% of $50, fractional. Literature cell (PAPER): Burgi, Deng, Whelan (Jan 2026). This-bot maker walk-forward: **FAIL** until recorded books exist. Provenance: `docs/backtest-proof-and-hardened.md`. `simulate` is a wiring test, not an edge claim.
 
 ## Risk
 

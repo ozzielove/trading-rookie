@@ -7,6 +7,7 @@ Read in order. Claude Code CLI executes docs/BUILD.md after this folder.
 3. 01-strategy.md — locked desk vote
 4. 02-kalshi.md — Venue (API, fees, size)
 5. 03-backtest-gate.md — Tape (what we cannot fake)
+5b. ../backtest-proof-and-hardened.md — PAPER vs FAIL provenance (Claude Code: not hearsay)
 6. 04-runtime-24-7.md — Hostinger Python loop, OpenClaw supervisor
 7. ../BUILD.md — numbered implementation steps
 8. ../CLAUDE.md — operator rules
