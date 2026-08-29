@@ -15,6 +15,7 @@ build/
 htmlcov/
 data/raw/
 data/cache/
+data/kalshi/
 logs/
 *.pkl
 *.joblib
