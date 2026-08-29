@@ -40,8 +40,8 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit("refusing to run: mode is not paper")
 
     df = synthetic_history(days=max(args.days, cfg.min_history_days))
-    result = walk_forward(df, cfg)
-    print("mode=paper (synthetic replay — not a claim of edge)")
+    result = walk_forward(df, cfg, fee_bps=1.0, spread_bps=1.0)
+    print("mode=paper synthetic wiring test. costs are placeholders not Kalshi fees. not a claim of edge")
     print(f"start_equity={cfg.bankroll:.2f}")
     print(f"final_equity={result.final_equity:.2f}")
     print(f"total_return={result.total_return:.2%}")

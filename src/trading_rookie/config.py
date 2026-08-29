@@ -15,7 +15,7 @@ class Config(BaseSettings):
 
     mode: str = Field(default="paper", description="paper | live")
     bankroll: float = Field(default=50.0, gt=0)
-    risk_pct: float = Field(default=0.01, gt=0, le=0.05)
+    risk_pct: float = Field(default=0.01, gt=0, le=0.01)
     min_weight: float = Field(default=0.05, gt=0, lt=0.5)
     learning_rate: float = Field(default=0.08, gt=0, lt=1)
     morph_rate: float = Field(default=0.04, gt=0, lt=1)

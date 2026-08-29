@@ -31,8 +31,8 @@ class WalkForwardResult:
 def walk_forward(
     df: pd.DataFrame,
     config: Config | None = None,
-    fee_bps: float = 10.0,
-    spread_bps: float = 20.0,
+    fee_bps: float | None = None,
+    spread_bps: float | None = None,
 ) -> WalkForwardResult:
     """Expanding-window replay. Costs are required. No fabricated PnL."""
     if config is None:
