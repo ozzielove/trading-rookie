@@ -200,9 +200,9 @@ Public counts actually retrieved 2026-08-29 (unauth), `https://external-api.kals
 | Oldest hist print | `2021-06-30T20:09:14Z` `HOME-21JUN-T750` |
 | Print at cutoff | `2026-06-29T23:59:59Z` |
 | Print at 180d boundary | `2026-03-01T23:59:59Z` |
-| Newest live print | `2026-08-29T09:48:32Z` |
+| Newest live print | `2026-08-29T11:05:54Z` `KXBTC15M-26AUG290715-15` (later retrieval; 07:05 ET) |
 | 1-min candles | `KXHIGHNY-26JUN28-B81.5` n=421 (bid/ask OHLC, not BBO) |
-| Hist orderbook | HTTP 404 |
+| Hist orderbook | HTTP 404 (`GET /historical/markets/KXHIGHNY-26JAN10-T52/orderbook`) |
 
 A 365-day **trade** calendar exists. A 365-day **maker fill** calendar does not. Tape `taker_book_side` is someone else.
 
@@ -220,4 +220,17 @@ If `n_snapshots=0` → `status=FAIL`, empty PnL columns, `fail_reason=no_book`. 
 ```
 
 Canonical gate: `docs/prd/03-backtest-gate.md`. PR 2 was a whole-file add of Tape's draft; it was folded here so Book and Venue stamps stay.
+
+Tape addendum (not a file replace). Still FAIL on daily maker PnL. Extra official counts, 2026-08-29 unauth HTTP 200:
+
+| Fact | Value |
+| --- | --- |
+| KXHIGHNY historical markets, fully paged | n=9094, 10 pages, not truncated. All finalized with result. `open_time` 2021-08-05T15:15:00Z → 2026-06-27T14:00:00Z. `settlement_ts` → 2026-06-29T12:01:12Z |
+| `series_ticker` on `GET /historical/trades` | ignored (ticker-only) |
+| Fully paged trades, top-3 `volume_fp` | `KXHIGHNY-26JAN10-T52` n=2304; `26FEB07-T24` n=1392; `26FEB22-T38` n=3565 |
+| Live open KXHIGHNY | n=6 |
+| Live newest print | `KXBTC15M-26AUG290715-15` at 2026-08-29T11:05:54Z (07:05 ET) |
+| Hist orderbook `KXHIGHNY-26JAN10-T52` | 404 |
+
+These are tape/universe counts. They do not lift the maker daily-PnL FAIL.
 
